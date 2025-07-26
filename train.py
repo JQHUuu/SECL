@@ -61,18 +61,7 @@ for args.dataset in ["cora"]:
         args.lr = 1e-3
         args.dims = [500]
         args.tao = 0.2
-    elif args.dataset == 'acm':
-        args.cluster_num = 3
-        args.gnnlayers = 2
-        args.lr = 5e-5
-        args.dims = [500]
-        args.tao = 1.0
-    elif args.dataset == 'corafull':
-        args.cluster_num = 70
-        args.gnnlayers = 2
-        args.lr = 5e-5
-        args.dims = [500]
-        args.tao = 1.0
+
 
     # load data
     X, y, A = load_graph_data(args.dataset, show_details=False)
