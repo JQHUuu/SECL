@@ -116,7 +116,7 @@ for args.dataset in ["cora"]:
         print('Start Training...')
         for epoch in tqdm(range(args.epochs)):
             model.train()
-            z1, z2, H = model(inx, torch.tensor(A).float().to(args.device), args.dataset, is_train=True,
+            z2, z1, H = model(inx, torch.tensor(A).float().to(args.device), args.dataset, is_train=True,
                               sigma=args.sigma)
             S = z1 @ z2.T
 
@@ -128,10 +128,10 @@ for args.dataset in ["cora"]:
             optimizer.step()
             if epoch % 10 == 0:
                 model.eval()
-                z1, z2, _ = model(inx, torch.tensor(A).float().to(args.device), args.dataset, is_train=False,
+                z2, z1, _ = model(inx, torch.tensor(A).float().to(args.device), args.dataset, is_train=False,
                                   sigma=args.sigma)
                 S = z1 @ z2.T
-                hidden_emb = z1
+                hidden_emb = z2
 
                 acc, nmi, ari, f1, predict_labels = clustering(hidden_emb, true_labels, args.cluster_num)
                 if acc >= best_acc:
